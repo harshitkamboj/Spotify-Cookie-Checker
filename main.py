@@ -29,7 +29,7 @@ def format_cookie_file(data, cookie_content):
     auto_pay = "True" if data.get("isRecurring", False) else "False"
     trial = "True" if data.get("isTrialUser", False) else "False"
 
-    header = f"PLAN = {plan}\nCOUNTRY = {country}\nAutoPay = {auto_pay}\nTrial = {trial}\nSpotify COOKIE :👇\n\n\n"
+    header = f"PLAN = {plan}\nCOUNTRY = {country}\nAutoPay = {auto_pay}\nTrial = {trial}\nChecker By: github.com/harshitkamboj\nSpotify COOKIE :👇\n\n\n"
     return header + cookie_content
 
 def checkNetscapeCookies(num_threads=1):
