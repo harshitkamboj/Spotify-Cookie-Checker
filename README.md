@@ -1,5 +1,5 @@
 # 🔥 Spotify Cookie Checker
-# ⭐ Give Star to Repo to Support
+# ⭐ Give Star to Repo for Support
 ## ⚡ Features
 - Multi-threading support
 - Json + Netscape support
