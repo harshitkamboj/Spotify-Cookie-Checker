@@ -1,5 +1,5 @@
 # STATUS - WORKING..
-## new update V2 coming on ETA 7-June-2025 with many new features (can be increase based on how many features i add!!!)
+## new update V2 coming on ETA 9-June-2025 with many new features (can be increase based on how many features i add!!!)
 
 # 🔥 Spotify Cookie Checker
 # ⭐ Give Star to Repo for Support
