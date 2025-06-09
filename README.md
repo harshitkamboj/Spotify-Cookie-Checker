@@ -1,4 +1,4 @@
-# 🎵 Spotify Cookie Checker
+# 🎵 Spotify Cookie Checker V2
 
 A powerful, multi-threaded Spotify cookie validator that checks cookie validity, extracts account information, and organizes results efficiently.
 
