@@ -21,8 +21,8 @@ pip install requests
 
 1. **Clone the repository**
     ```
-    git clone https://github.com/harshitkamboj/spotify-cookie-checker.git
-    cd spotify-cookie-checker
+    git clone https://github.com/harshitkamboj/Spotify-Cookie-Checker.git
+    cd Spotify-Cookie-Checker
     ```
 
 2. **Install dependencies**
