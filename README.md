@@ -1,7 +1,7 @@
-# STATUS: NOT-WORKING | FIXING RELEASING SOON
+# ⚠️ STATUS: NOT-WORKING | FIXING RELEASING SOON
 ### UPDATED 24-02-2026
 ## Donate cookies on discord for fast checking 
-Discord: harshitkamboj.in
+👉Discord: [harshitkamboj.in](https://harshitkamboj.in/)
 
 
 # 🎵 Spotify Cookie Checker V2
@@ -164,5 +164,6 @@ If you found this tool helpful, please:
   <br>
   <i>Star ⭐ this repo if you found it useful!</i>
 </div>
+
 
 
