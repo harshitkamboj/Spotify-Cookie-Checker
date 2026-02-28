@@ -18,7 +18,7 @@ Don’t use Python? Download the prebuilt `.exe`:
 - email
 - country
 - owner/member status (family/duo)
-- child account (when true)
+- child account
 - family free slots, invite link, and address (when available)
 - next payment date (when detectable)
 - 🌐 Broad proxy format support (`http`, `https`, `socks4/5`, auth variants)
@@ -232,3 +232,4 @@ MIT License. See `LICENSE`.
 ## ⚠️ Disclaimer
 
 Educational use only. Use only on accounts/cookies you are authorized to test.
+
