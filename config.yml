@@ -1,0 +1,31 @@
+# Checker By: https://github.com/harshitkamboj
+# Website: https://harshitkamboj.in
+# Discord: illuminatis69
+
+# Spotify Checker configuration
+# true/false fields let users turn output lines ON/OFF in generated txt.
+txt_fields:
+  plan: true # Plan name (Premium, Family Premium, etc.)
+  email: true # Account email if found
+  country: true # Country code (US, UK, North Korea etc.)
+  owner: true # shown only for family/duo plans (true = owner/master, false = member)
+  free_slots: true # shown only for family owner accounts; remaining member slots
+  invite_link: true # shown only for family owner accounts; when invite URL is available
+  address: true # shown only for family owner accounts; when address is available
+
+notifications:
+  webhook:
+    enabled: false # true to send output to Discord webhook
+    url: "" # put full webhook URL here
+    mode: "full" # allowed: "full" or "invite_address_only"
+  telegram:
+    enabled: false # true to send output to Telegram
+    bot_token: "" # token from @BotFather
+    chat_id: "" # your chat/channel id (example: "-1001234567890")
+    mode: "full" # allowed: "full" or "invite_address_only"
+
+display:
+  mode: "simple" # "log" = per-cookie log lines, "simple" = plan counters dashboard
+
+retries:
+  error_proxy_attempts: 3 # on error, retry this many times (different proxy per try when available) (if using free proxy add do it 1 million as those are shit XD, JK)

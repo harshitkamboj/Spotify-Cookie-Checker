@@ -1,5 +1,13 @@
-# Add your proxies here
-# Format: ip:port or ip:port@user:pass
-# Example:
+# Add your proxies here (one per line)
+# Supported examples:
 # 127.0.0.1:8080
-# 192.168.1.1:3128@username:password
+# user:pass@127.0.0.1:8080
+# 127.0.0.1:8080@user:pass
+# http://127.0.0.1:8080
+# http://user:pass@127.0.0.1:8080
+# https://user:pass@127.0.0.1:8080
+# socks5://user:pass@127.0.0.1:1080
+# 127.0.0.1:8080:user:pass
+# user:pass:127.0.0.1:8080
+# 127.0.0.1:8080 user:pass
+# 127.0.0.1:8080|user:pass

@@ -1,171 +1,248 @@
-# ⚠️ STATUS: NOT-WORKING | FIXING RELEASING SOON
-### UPDATED 28-02-2026
-## Spotify change api system ETA 2 March (maybe 28 Feb night)
-## 1 Million stars for cookie
+# Spotify Cookie Checker V2
 
+Multi-threaded Spotify cookie checker with account data extraction, proxy rotation, configurable retries, and organized output.
 
-# 🎵 Spotify Cookie Checker V2
+## Features
 
-A powerful, multi-threaded Spotify cookie validator that checks cookie validity, extracts account information, and organizes results efficiently.
+- Fast multi-threaded cookie checking
+- Supports both Netscape `.txt` and JSON cookie formats
+- Extracts plan, email, and country
+- Extracts owner/member status for family/duo
+- Detects child-account status when true
+- Extracts family free slots, invite link, and address when available
+- Detects next payment date when available
+- Broad proxy format support (`http`, `https`, `socks4/5`, auth variants)
+- Smart retry system with proxy rotation on retryable errors
+- Built-in email dedupe (duplicates are skipped and counted)
+- `log` mode for detailed per-cookie output
+- `simple` mode for clean live dashboard counters
+- Telegram + Discord notifications
+- `full` and `invite_address_only` notification modes
+- Plan-based output organization by run folder and account type
 
-## ✨ Features
+## Requirements
 
-- 🚀 **Multi-threaded Processing** - Fast concurrent cookie validation
-- 🌐 **Proxy Support** - Rotate through proxies to avoid rate limiting
-- 📊 **Detailed Account Info** - Extract plan, country, recurring status, trial, owner, and more
-- 🔄 **Auto Format Conversion** - Convert JSON cookies to Netscape format automatically
-- 📁 **Smart Organization** - Automatically sorts results into structured folders
-- 📈 **Real-time Statistics** - Live progress tracking in the console and window title
-- 🎨 **Colorful Interface** - Console output with status indicators
+Install dependencies:
 
-## 📋 Requirements
-```
-pip install requests
-```
-
-## 🚀 Quick Start
-
-1. **Clone the repository**
-    ```
-    git clone https://github.com/harshitkamboj/Spotify-Cookie-Checker.git
-    cd Spotify-Cookie-Checker
-    ```
-
-2. **Install dependencies**
-    ```
-    pip install -r requirements.txt
-    ```
-
-3. **Setup your files**
-    - Add your Spotify cookies (`.txt` or `.json` format) to the `cookies/` folder
-    - Add proxies to `proxy.txt` (optional but recommended)
-
-4. **Run the checker**
-    ```
-    python main.py
-    ```
-
-## 📁 Folder Structure
-```
-├── cookies/ # Input folder for your cookies
-├── hits/ # Working subscribed accounts
-├── failed/ # Invalid/expired cookies
-├── broken/ # Malformed cookie files
-├── proxy.txt # Your proxy list (optional)
-└── main.py # Main script
+```bash
+pip install -r requirements.txt
 ```
 
-## 🍪 Cookie Formats Supported
+Optional (for SOCKS proxies):
 
-### Netscape Format (.txt)
-```
-.spotify.com TRUE / FALSE 1234567890 cookie_name cookie_value
+```bash
+pip install requests[socks]
 ```
 
-### JSON Format (.json)
+## Quick Start
+
+1. Clone:
+```bash
+git clone https://github.com/harshitkamboj/Spotify-Cookie-Checker.git
+cd Spotify-Cookie-Checker
 ```
+2. Install requirements:
+```bash
+pip install -r requirements.txt
+```
+3. Put cookie files in `cookies/`
+4. Add proxies in `proxy.txt` (optional)
+5. Configure `config.yml` if needed
+6. Run:
+```bash
+python main.py
+```
+
+## Folder Layout
+
+```text
+cookies/         # input cookies
+failed/          # invalid/expired
+broken/          # malformed/error cases
+hits/
+  run_YYYY-MM-DD_HH-MM-SS/
+    Premium/
+    Free/
+    Duo Premium/
+      owner_account/
+      non_owner_account/
+      unknown/
+    Family Premium/
+      owner_account/
+      non_owner_account/
+      unknown/
+    Family Basic/
+      owner_account/
+      non_owner_account/
+      unknown/
+proxy.txt
+config.yml
+main.py
+```
+
+## Cookie Formats
+
+Netscape example:
+
+```text
+.spotify.com	TRUE	/	FALSE	1234567890	sp_dc	xxx
+```
+
+JSON array example:
+
+```json
 [
-{
-"domain": ".spotify.com",
-"flag": "TRUE",
-"path": "/",
-"secure": false,
-"expirationDate": 1234567890,
-"name": "cookie_name",
-"value": "cookie_value"
-}
+  {
+    "domain": ".spotify.com",
+    "path": "/",
+    "secure": false,
+    "expirationDate": 1234567890,
+    "name": "sp_dc",
+    "value": "xxx"
+  }
 ]
 ```
 
-## 🌐 Proxy Setup
+## Proxy Formats
 
-Create a `proxy.txt` file with your proxies (one per line):
-```
+One proxy per line in `proxy.txt`.
+
+Supported examples:
+
+```text
 ip:port
 user:pass@ip:port
+ip:port@user:pass
 http://ip:port
 http://user:pass@ip:port
+https://user:pass@ip:port
+socks4://user:pass@ip:port
+socks4a://user:pass@ip:port
+socks5://user:pass@ip:port
+socks5h://user:pass@ip:port
+ip:port:user:pass
+user:pass:ip:port
+ip:port user:pass
+ip:port|user:pass
+ip:port;user:pass
+ip:port,user:pass
 ```
 
-## 📊 Output Examples
+Also accepted/normalized:
 
-### Working Subscribed Account (hits/)
-```
-Filename: US_github-harshitkamboj_Premium_12345678.txt
-
-Plan: Premium
-Country: US
-Autopay: True
-Trial: False
-Owner: True
-Checker By: github.com/harshitkamboj
-Spotify COOKIE :👇
-
-[original cookie content]
+```text
+http:/ip:port
 ```
 
-## ⚙️ Configuration
+## Config (`config.yml`)
 
-You can modify these settings in the script:
+The checker reads settings from `config.yml`.
 
-- **Thread Count**: Change `num_threads` parameter (default: 10)
-- **Timeout**: Modify request timeout (default: 15 seconds)
+### Sections
 
-## 📈 Statistics
+- `txt_fields`: controls which fields are written in output txt files
+- `notifications`: Discord/Telegram delivery settings and mode
+- `display`: console UI mode
+- `retries`: retry count for retryable request/proxy errors
 
-The checker provides detailed statistics:
-- 📈 Total cookies checked
-- ✅ Working subscribed accounts
-- ❌ Working but unsubscribed accounts
-- 💀 Dead/expired cookies
+### Example
 
-## 🔧 Advanced Features
+```yml
+txt_fields:
+  plan: true
+  email: true
+  country: true
+  owner: true
+  free_slots: true
+  invite_link: true
+  address: true
 
-### Smart Error Handling
-- Handles malformed cookies gracefully
-- Proxy fallback mechanism
-- Automatic retry on network errors
+notifications:
+  webhook:
+    enabled: false
+    url: ""
+    mode: "full"
+  telegram:
+    enabled: false
+    bot_token: ""
+    chat_id: ""
+    mode: "full"
 
-### Account Information Extraction
-- Plan type and pricing tier
-- Country of registration
-- Owner status
-- Recurring/Trial status
+display:
+  mode: "log"
 
-## 🤝 Contributing
+retries:
+  error_proxy_attempts: 3
+```
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Key options
 
-## ⚠️ Disclaimer
+- `notifications.webhook.mode`
+- `full`: sends full account details + file
+- `invite_address_only`: sends only family invite/address style message for eligible family owners
 
-This tool is for educational purposes only. Please ensure you have permission to test the cookies you're using. Respect Spotify's terms of service and rate limits.
+- `notifications.telegram.mode`
+- `full`: sends full account details + file
+- `invite_address_only`: sends only family invite/address style message for eligible family owners
 
-## 🌟 Support
+- `display.mode`
+- `log`: per-cookie status logs
+- `simple`: dashboard-style counters
 
-If you found this tool helpful, please:
-- ⭐ Star this repository
-- 🍴 Fork and share with others
-- 🐛 Report any issues you find
-- 💡 Suggest new features
+- `retries.error_proxy_attempts`
+- Number of total attempts per cookie (example: `3` = first try + 2 retries)
 
-## 📞 Contact
+## Retry Behavior
 
-- **GitHub**: [@harshitkamboj](https://github.com/harshitkamboj)
-- **Discord**: illuminatis69
+For each cookie, checker retries up to `retries.error_proxy_attempts` when request/proxy errors happen.
 
----
+- Each retry uses a different proxy when available
+- Retry-trigger status codes: `403`, `429`, `500`, `502`, `503`, `504`
+- If all retries fail on error conditions, file moves to `broken/`
+- Normal invalid cookie flow moves file to `failed/`
 
-<div align="center">
-  <b>Made with ❤️</b>
-  <br>
-  <i>Star ⭐ this repo if you found it useful!</i>
-</div>
+## Email Dedupe
 
+Built-in behavior (always enabled):
 
+- First valid account for an email is kept
+- Next valid cookies with same email are treated as duplicates
+- Duplicate cookies are skipped (counted in console stats only; no output file)
 
+## Output Notes
 
+- File name format: `<COUNTRY>_github-harshitkamboj_<PLAN>_<RANDOM>.txt`
+- Output includes: `Checker By: github.com/harshitkamboj | Website: harshitkamboj.in`
 
+## Account Plan Mapping
+
+Detected and mapped plans include:
+
+- `premium`
+- `premium_mini`
+- `basic_premium`
+- `student_premium`
+- `student_premium_hulu`
+- `duo_premium`
+- `family_premium_v2`
+- `family_basic`
+- `free`
+- `unknown`
+
+## Contact
+
+- GitHub: https://github.com/harshitkamboj
+- Website: https://harshitkamboj.in
+- Discord: illuminatis69
+
+## Support
+
+- Star the repo: https://github.com/harshitkamboj/Spotify-Cookie-Checker
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
+## Disclaimer
+
+Educational use only. Use only on accounts/cookies you are authorized to test.
