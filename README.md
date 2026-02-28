@@ -1,7 +1,7 @@
 # ⚠️ STATUS: NOT-WORKING | FIXING RELEASING SOON
-### UPDATED 24-02-2026
-## Donate cookies on discord for fast fixing 
-👉Discord: [harshitkamboj.in](https://harshitkamboj.in/) Or see details here: [click here](https://harshitkamboj.in/)
+### UPDATED 28-02-2026
+## Spotify change api system ETA 2 March (maybe 28 Feb night)
+## 1 Million stars for cookie
 
 
 # 🎵 Spotify Cookie Checker V2
