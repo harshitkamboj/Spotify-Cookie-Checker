@@ -3,6 +3,7 @@
 Fast, multi-threaded Spotify cookie checker with smart parsing, proxy rotation, retries, detailed account extraction, and Discord/Telegram notifications.
 
 # 📢 Releasing Website soon with multiple cookie checker and much more is 1-2nd week of March
+## Discord: https://discord.gg/DYJFE9nu5X
 
 ## ⬇️ Download (EXE)
 
@@ -234,5 +235,6 @@ MIT License. See `LICENSE`.
 ## ⚠️ Disclaimer
 
 Educational use only. Use only on accounts/cookies you are authorized to test.
+
 
 
